@@ -17,12 +17,3 @@ const Todo = () => {
  
 export default Todo;
 
-
-{/* <div className="todo">
-<div className="circle">
-</div>
-  <p>Ipsum dolor sit amet.</p>
-  <button>
-    <img src={cross} alt="" />
-  </button>
-</div> */}

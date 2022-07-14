@@ -1,16 +1,17 @@
 import check from '../../assets/images/icon-check.svg';
 import cross from '../../assets/images/icon-cross.svg';
 
-const TodoContainer = ({ todos, deleteTodo, deleteCompleted, markCompleted}) => {
+const TodoContainer = ({ todos, deleteTodo, deleteCompleted, markCompleted, filterTodo}) => {
 
     return ( 
     <div className="todos">
        {
-        todos.map(todo => {
-          if(todo.status === "completed"){
+        filterTodo().map(todo => {
+          
+          if(todo.isDone === true){
             return(
               <div className="todo completed" key={todo.id}>
-                <div className="check">
+                <div className="check" onClick={e => markCompleted(todo.id)}>
                   <img src={check} alt="check" />
                 </div>
                   <p>{todo.name}</p>

@@ -2,26 +2,56 @@ import AddTodo from './components/Todos/AddTodo';
 import TodoContainer from './components/Todos/TodoContainer';
 import TodoFilter from './components/Todos/TodoFilter';
 import TodoHeader from './components/Todos/TodoHeader';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react'; 
 
 function App() {
+
   const [todos, setTodos] = useState([
-    {name:"Complete online JavaScript course", status:"completed", id:"1"},
-    {name:"Jog around the park 3x", status:"active", id:"2"},
-    {name:"10 minutes meditation", status:"active", id:"3"},
-    {name:"Read for 1 hour", status:"active", id:"4"},
-    {name:"Pick up grocercies", status:"active", id:"5"},
-    {name:"Complete Todo App on Frontend Mentor", status:"active", id:"6"}
+    {
+      name:"Complete online JavaScript course",
+      isDone:true,
+      id:1
+    },
+    {
+      name:"Jog around the park 3x",
+      isDone:false,
+      id:2
+    },
+    {
+      name:"10 minutes meditation",
+      isDone:false,
+      id:3
+    },
+    {
+      name:"Read for 1 hour",
+      isDone:false,
+      id:4
+    },
+    {
+      name:"Pick up grocercies",
+      isDone:false,
+      id:5
+    },
+    {
+      name:"Complete Todo App on Frontend Mentor",
+      isDone:false,
+      id:6
+    }
   ]);
 
-  const [filteredTodos, setFilteredTodos] = useState(todos);
-  const [filtered,setFiltered] = useState(false);
-  const [active, setActive] = useState("all");
 
-  const addTodo = (e) =>{
-    let todo = {
-      name: e.target.value,status:"active",id:""+ Math.floor(Math.random() * 100)
-    }
+  const [filter, setFilter] = useState("all");
+  const [isDarkTheme, setIsDarkTheme] = useState(true);
+
+  useEffect(()=>{
+    isDarkTheme ? document.body.style.background = "url('/src/assets/images/bg-mobile-light.jpg') #fff;" : document.body.style.background = "";
+
+  },[isDarkTheme])
+
+
+ 
+
+  const addTodo = (todo) =>{
 
     setTodos([...todos,todo])
   
@@ -29,13 +59,11 @@ function App() {
   
 
   const deleteTodo = (id) =>{
-    let newTodos = todos.filter(todo => todo.id !== id);
-    filtered ? setFilteredTodos(newTodos):setTodos(newTodos);
+    setTodos([...todos].filter(todo => todo.id !== id));
   }
 
   const deleteCompleted = () => {
-    let newTodos = todos.filter(todo => todo.status !== "completed");
-    filtered ? setFilteredTodos(newTodos):setTodos(newTodos);
+    setTodos([...todos].filter(todo => todo.isDone !== true));
     
   }
 
@@ -43,42 +71,43 @@ function App() {
     
     let newTodos = todos.map(todo => {
         if(todo.id === id){
-          todo.status = "completed";
+          todo.isDone = !todo.isDone;
         }
         return todo;
       });
       
-      filtered ? setFilteredTodos(newTodos):setTodos(newTodos);
+      setTodos(newTodos);
   }
 
-  const filterTodo = (status) => {
-      let newTodos;
+  const filterTodo = () =>{
 
-      if(status !== "all"){
-        newTodos = todos.filter(todo => todo.status === status);
-        status === "active" ? setActive("active"): setActive("completed");
-        
-      }else{
-        newTodos = todos;
-        setActive("all");
-      }
+    if(filter === "all"){
+      return todos;
+    }else if(filter === "active"){
       
-     
-      
-      setFilteredTodos(newTodos);
-      setFiltered(true)
+      return todos.filter(todo => todo.isDone === false);
+
+    }else{
+      return todos.filter(todo => todo.isDone === true);
+    }
+
   }
+  
+
+
 
 
   return (
-    <div className="container">
-      <TodoHeader/>
-      <AddTodo addTodo={addTodo}/>
-      <TodoContainer todos={filtered ? filteredTodos: todos} deleteTodo = {deleteTodo} deleteCompleted= {deleteCompleted} markCompleted = {markCompleted}/>
-      <TodoFilter filterTodo={filterTodo} active={active}/>
+      <div className="container ">
+        <TodoHeader isDarkTheme={isDarkTheme} setIsDarkTheme={setIsDarkTheme}/>
+        <AddTodo addTodo={addTodo}/>
+        <TodoContainer todos={ todos } deleteTodo = { deleteTodo } deleteCompleted= { deleteCompleted }  markCompleted = { markCompleted } filterTodo={filterTodo} />
+        <TodoFilter setFilter = {setFilter}  filter = {filter}/>
 
-      <p className='last'>Drag and drop to reorder list</p>
-    </div>
+        <p className='last'>Drag and drop to reorder list</p>
+      </div>
+    
+
   );
 }
 

@@ -33,13 +33,18 @@
 }
 
 body{
+
   width: 100vw;
-  height: 100vh;
+  height: 100vh; 
   margin: 0 auto;
   background: url('/src/assets/images/bg-mobile-dark.jpg') #181824;
   background-repeat: no-repeat;
   background-attachment: fixed;
 
+}
+
+.light-theme{
+  background: url('/src/assets/images/bg-mobile-light.jpg') #fff;
 }
 
 img{
@@ -56,6 +61,7 @@ img{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   
 }
 
@@ -91,18 +97,6 @@ h1{
 }
 
 .circle:hover{
-  /* 
-  border: solid;
-  border-radius: 50%;
-  border-image-slice: 1;
-  border-width: 2px;
-  padding: 8px;
-  border-image-source: linear-gradient(
-    60deg,#b16ec4,#5f97b9
-  );
-  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor; 
-   mask-composite: exclude;  */
    position: relative;
    cursor: pointer;
 
@@ -240,6 +234,11 @@ button.active-filter{
     background: url("/src/assets/images/bg-desktop-dark.jpg") #181824;
     background-repeat: no-repeat;
   }
+
+  .light-theme{
+    background: url('/src/assets/images/bg-desktop-light.jpg') #fff;
+  }
+
   .container{
     margin: 5rem auto;
     height: auto;
