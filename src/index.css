@@ -39,7 +39,8 @@ body{
   margin: 0 auto;
   background: url('/src/assets/images/bg-mobile-dark.jpg') #181824;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-size: 100% 40%;
+  
 
 }
 
@@ -231,12 +232,12 @@ button.active-filter{
 
 @media screen and (min-width: 375px){
   body{
-    background: url("/src/assets/images/bg-desktop-dark.jpg") #181824;
-    background-repeat: no-repeat;
+    /* background: url("/src/assets/images/bg-desktop-dark.jpg") #181824; */
+    /* background-repeat: no-repeat; */
   }
 
   .light-theme{
-    background: url('/src/assets/images/bg-desktop-light.jpg') #fff;
+    /* background: url('/src/assets/images/bg-desktop-light.jpg') #fff; */
   }
 
   .container{
@@ -244,4 +245,4 @@ button.active-filter{
     height: auto;
   }
   
-}
+} 
